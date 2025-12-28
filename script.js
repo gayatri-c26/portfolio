@@ -24,8 +24,8 @@ if (contactForm) {
         const subject = document.getElementById('subject').value;
         const message = document.getElementById('message').value;
         
-        // Show success message
-        alert(`Thank you ${name}! Your message has been received. I will get back to you soon at ${email}.`);
+        // Show success message with emoji
+        alert(`✨ Thank you ${name}! Your message has been received. I will get back to you soon at ${email}. 💕`);
         
         // Reset form
         this.reset();
@@ -59,7 +59,7 @@ window.addEventListener('scroll', () => {
 // Add animation on scroll for sections
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -72,24 +72,73 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe all section elements for animation
-document.querySelectorAll('.content-section, .project-card, .skill-card, .cert-card').forEach(el => {
+document.querySelectorAll('.skill-card, .cert-card, .project-card, .experience-box').forEach(el => {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
+    el.style.transform = 'translateY(20px)';
     el.style.transition = 'all 0.6s ease-out';
     observer.observe(el);
 });
 
-// Add hover effect sound (optional - commented out)
-/*
-document.querySelectorAll('.skill-badge, .project-card, .skill-card').forEach(element => {
-    element.addEventListener('mouseenter', () => {
-        // Add any additional hover effects here
-        element.style.transition = 'all 0.3s ease';
+// Add sparkle effect on hover for skill badges (optional enhancement)
+document.querySelectorAll('.skill-badge').forEach(badge => {
+    badge.addEventListener('mouseenter', () => {
+        badge.style.animation = 'sparkle 0.6s ease';
+    });
+    
+    badge.addEventListener('animationend', () => {
+        badge.style.animation = '';
     });
 });
-*/
 
-// Console welcome message
-console.log('%c👋 Welcome to Gayatri\'s Portfolio!', 'color: #00d4ff; font-size: 20px; font-weight: bold;');
-console.log('%c💼 Interested in collaboration? Contact: charkupalligayatri2610@gmail.com', 'color: #ffd600; font-size: 14px;');
-console.log('%c🔗 LinkedIn: https://www.linkedin.com/in/gayatric26', 'color: #00ff88; font-size: 14px;');
+// Add CSS animation for sparkle effect
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes sparkle {
+        0%, 100% { filter: brightness(1); }
+        50% { filter: brightness(1.3); }
+    }
+`;
+document.head.appendChild(style);
+
+// Console welcome message with aesthetic styling
+console.log('%c✨ Welcome to Gayatri\'s Portfolio! ✨', 
+    'color: #ec4899; font-size: 24px; font-weight: bold; font-family: Poppins, sans-serif;'
+);
+console.log('%c💼 Looking for collaboration? Let\'s connect!', 
+    'color: #8b5cf6; font-size: 16px; font-family: Poppins, sans-serif;'
+);
+console.log('%c📧 Email: charkupalligayatri2610@gmail.com', 
+    'color: #64748b; font-size: 14px; font-family: Poppins, sans-serif;'
+);
+console.log('%c🔗 LinkedIn: https://www.linkedin.com/in/gayatric26', 
+    'color: #64748b; font-size: 14px; font-family: Poppins, sans-serif;'
+);
+
+// Add subtle parallax effect to hero section
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+    }
+});
+
+// Typing effect for hero title (optional - uncomment to use)
+/*
+const heroTitle = document.querySelector('.hero-title');
+if (heroTitle) {
+    const originalText = heroTitle.textContent;
+    heroTitle.textContent = '';
+    let i = 0;
+    
+    const typeWriter = () => {
+        if (i < originalText.length) {
+            heroTitle.textContent += originalText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 100);
+        }
+    };
+    
+    setTimeout(typeWriter, 500);
+}
+*/
